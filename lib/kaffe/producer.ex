@@ -122,7 +122,7 @@ defmodule Kaffe.Producer do
   defp produce_list_to_topic(message_list, topic) do
     message_list
     |> Enum.reduce_while(:ok, fn ({partition, messages}, :ok) ->
-      Logger.debug "event#produce_list_to_topic partition=#{partition} messages=#{inspect messages}"
+      # Logger.debug "event#produce_list_to_topic partition=#{partition} messages=#{inspect messages}"
       case @kafka.produce_sync(client_name(), topic, partition, "ignored", messages) do
         :ok -> {:cont, :ok}
         {:error, _reason} = error -> {:halt, error}
